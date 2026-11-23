@@ -58,10 +58,10 @@ function Half({ side, weight }: { side: Side; weight: "l" | "j" }) {
 export default function Duo() {
   /* o divisor desliza: Lucia domina → Jason responde → equilíbrio */
   const onUpdate = useCallback((p: number, el: HTMLElement) => {
-    const s1 = clamp01(p / 0.4);
-    const s2 = clamp01((p - 0.4) / 0.4);
-    const s3 = clamp01((p - 0.8) / 0.2);
-    const d = 50 + 18 * s1 - 36 * s2 + 18 * s3;
+    const s1 = clamp01(p / 0.35);
+    const s2 = clamp01((p - 0.35) / 0.35);
+    const s3 = clamp01((p - 0.7) / 0.3);
+    const d = 50 + 24 * s1 - 48 * s2 + 24 * s3;
     el.style.setProperty("--dl", d.toFixed(2));
     el.style.setProperty("--dj", (100 - d).toFixed(2));
     el.style.setProperty("--eL", Math.min(1, s1 * (1 - s2) + s3 * 0.5 + 0.1).toFixed(3));

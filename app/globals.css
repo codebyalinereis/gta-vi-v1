@@ -695,6 +695,69 @@ body.is-ready .nav {
     linear-gradient(180deg, #07030e 0%, #150a28 30%, #35124b 52%, #711b63 70%, #c02d70 84%, #ff7a5c 100%);
 }
 
+/* estrelas no topo do céu */
+.hero__stars {
+  position: absolute;
+  inset: 0 0 40% 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(2px 2px at 12% 22%, rgba(255, 244, 236, 0.7), transparent 60%),
+    radial-gradient(1.5px 1.5px at 26% 10%, rgba(255, 244, 236, 0.5), transparent 60%),
+    radial-gradient(2px 2px at 38% 30%, rgba(255, 244, 236, 0.55), transparent 60%),
+    radial-gradient(1.5px 1.5px at 52% 12%, rgba(255, 244, 236, 0.6), transparent 60%),
+    radial-gradient(2px 2px at 64% 26%, rgba(255, 244, 236, 0.5), transparent 60%),
+    radial-gradient(1.5px 1.5px at 74% 8%, rgba(255, 244, 236, 0.65), transparent 60%),
+    radial-gradient(2px 2px at 86% 20%, rgba(255, 244, 236, 0.55), transparent 60%),
+    radial-gradient(1.5px 1.5px at 94% 34%, rgba(255, 244, 236, 0.5), transparent 60%),
+    radial-gradient(1.5px 1.5px at 6% 44%, rgba(255, 244, 236, 0.4), transparent 60%),
+    radial-gradient(1.5px 1.5px at 44% 44%, rgba(255, 244, 236, 0.35), transparent 60%);
+  animation: twinkle 5s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.55; }
+  to { opacity: 1; }
+}
+
+/* sol synthwave atrás do mosaico — afunda conforme o pôster monta */
+.hero__sun {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  z-index: 1;
+  width: 58vmin;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 46%, #fff4d4 0 15%, #ffd28d 36%, #ff9a5c 55%, #ff5f8f 75%, rgba(255, 63, 180, 0) 82%);
+  filter: blur(1px) drop-shadow(0 0 100px rgba(255, 138, 42, 0.4));
+  transform: translate(-50%, calc(-50% + var(--p, 0) * 7vh));
+}
+
+.hero__sun::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: repeating-linear-gradient(0deg, transparent 0 16px, rgba(5, 2, 8, 0.38) 16px 22px);
+  opacity: 0.32;
+  -webkit-mask-image: linear-gradient(180deg, transparent 28%, #000 62%);
+  mask-image: linear-gradient(180deg, transparent 28%, #000 62%);
+}
+
+/* silhueta da cidade */
+.hero__skyline {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: 0;
+  z-index: 1;
+  width: 104%;
+  height: clamp(90px, 16vh, 170px);
+  pointer-events: none;
+}
+
 .hero__mosaic {
   position: relative;
   z-index: 2;
@@ -702,7 +765,7 @@ body.is-ready .nav {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 8px;
-  width: min(1060px, 88vw);
+  width: min(1180px, 92vw);
   aspect-ratio: 16 / 9;
   perspective: 1200px;
 }
@@ -716,7 +779,7 @@ body.is-ready .nav {
     translate3d(calc(var(--sx) * (1 - var(--p, 0)) * 1vw), calc(var(--sy) * (1 - var(--p, 0)) * 1vh), 0)
     rotate(calc(var(--sr) * (1 - var(--p, 0)) * 1deg))
     scale(calc(1 + var(--ss) * (1 - var(--p, 0))));
-  opacity: calc(0.28 + 0.72 * var(--p, 0));
+  opacity: calc(0.5 + 0.5 * var(--p, 0));
   will-change: transform, opacity;
 }
 
@@ -1009,7 +1072,7 @@ body.is-ready .nav {
    ============================================================ */
 
 .duo {
-  height: 320vh;
+  height: 220vh;
   background: #07030d;
 }
 
@@ -1053,9 +1116,14 @@ body.is-ready .nav {
   object-fit: cover;
   object-position: var(--op, 50% 15%);
   user-select: none;
-  filter: saturate(calc(0.45 + var(--e) * 0.55)) brightness(calc(0.5 + var(--e) * 0.5));
-  transform: scale(calc(1.06 + var(--e) * 0.04));
-  will-change: transform, filter;
+  filter: saturate(calc(0.62 + var(--e) * 0.38)) brightness(calc(0.68 + var(--e) * 0.32));
+  transition: transform 0.7s var(--ease), filter 0.5s;
+}
+
+/* cresce só no hover do mouse */
+.duo__half:hover img {
+  transform: scale(1.06);
+  filter: saturate(1) brightness(1);
 }
 
 .duo__half::after {
@@ -1073,6 +1141,12 @@ body.is-ready .nav {
   z-index: 2;
   opacity: calc(0.3 + var(--e) * 0.7);
   transform: translateY(calc((1 - var(--e)) * 16px));
+  transition: opacity 0.4s, transform 0.4s var(--ease);
+}
+
+.duo__half:hover .duo__label {
+  opacity: 1;
+  transform: none;
 }
 
 .duo__role {
@@ -1984,7 +2058,7 @@ body.is-ready .nav {
 @media (max-width: 640px) {
   .stars { display: none; }
   .hero { height: 240vh; }
-  .duo { height: 360vh; }
+  .duo { height: 240vh; }
   .duo__sides { flex-direction: column; }
   .duo__divider { transform: skewX(-2.2deg) scaleX(1.08); }
   .duo__name { font-size: clamp(2.1rem, 9.5vw, 3.4rem); }

@@ -24,6 +24,8 @@ export default function Hero() {
     <section className="hero scene" id="inicio" data-loc="Vice City" data-locsub="Onde tudo começa" ref={ref}>
       <div className="hero__stage">
         <div className="hero__sky" aria-hidden="true" />
+        <div className="hero__stars" aria-hidden="true" />
+        <div className="hero__sun" aria-hidden="true" />
 
         <p className="hero__top">
           <span className="hero__eyebrow">Disponível agora · 19 · 11 · 2026</span>
@@ -70,6 +72,34 @@ export default function Hero() {
           </div>
           <p className="hero__meta">PlayStation 5 · Xbox Series X|S · Classificação 18+</p>
         </div>
+
+        {/* silhueta da cidade ao fundo */}
+        <svg className="hero__skyline" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
+          <path
+            d="M0 220 V150 h28 V120 h16 v30 h22 V95 h30 v55 h18 V140 h26 V70 h20 v70 h24 V120 h34 v20 h18 V88 h26 v72 h30 V130 h22 V60 h24 v70 h20 v-40 h16 v60 h28 V110 h24 v30 h20 V78 h28 v62 h24 V140 h30 v-25 h14 v25 h26 V100 h22 v40 h20 V132 h30 v88 Z"
+            fill="#0c0414"
+            opacity="0.92"
+          />
+          <g fill="#ff9ad5" opacity="0.5">
+            <rect x="36" y="128" width="3" height="5" />
+            <rect x="52" y="102" width="3" height="5" />
+            <rect x="106" y="140" width="3" height="5" />
+            <rect x="152" y="78" width="3" height="5" />
+            <rect x="212" y="126" width="3" height="5" />
+            <rect x="290" y="68" width="3" height="5" />
+            <rect x="364" y="120" width="3" height="5" />
+            <rect x="470" y="86" width="3" height="5" />
+            <rect x="560" y="128" width="3" height="5" />
+            <rect x="640" y="104" width="3" height="5" />
+            <rect x="730" y="140" width="3" height="5" />
+            <rect x="840" y="92" width="3" height="5" />
+            <rect x="940" y="124" width="3" height="5" />
+            <rect x="1050" y="72" width="3" height="5" />
+            <rect x="1160" y="118" width="3" height="5" />
+            <rect x="1260" y="138" width="3" height="5" />
+            <rect x="1360" y="100" width="3" height="5" />
+          </g>
+        </svg>
 
         <div className="hero__scroll" aria-hidden="true">
           <span /> Role para montar Leonida
