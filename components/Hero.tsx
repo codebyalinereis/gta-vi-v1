@@ -5,16 +5,16 @@ import { ASSETS, SHARDS } from "@/lib/data";
 
 /* dispersão inicial de cada caco (vw / vh / graus / escala) */
 const SCATTER = [
-  { sx: -24, sy: -12, sr: -8, ss: 0.35 },
-  { sx: 18, sy: 16, sr: 6, ss: 0.25 },
-  { sx: -14, sy: 22, sr: -5, ss: 0.3 },
-  { sx: 26, sy: -18, sr: 9, ss: 0.4 },
-  { sx: -30, sy: 10, sr: -7, ss: 0.28 },
-  { sx: 20, sy: -22, sr: 5, ss: 0.33 },
-  { sx: -18, sy: 14, sr: -9, ss: 0.38 },
-  { sx: 28, sy: 20, sr: 7, ss: 0.26 },
-  { sx: -22, sy: -14, sr: -6, ss: 0.31 },
-  { sx: 16, sy: 18, sr: 8, ss: 0.36 },
+  { sx: -14, sy: -8, sr: -5, ss: 0.22 },
+  { sx: 10, sy: 9, sr: 4, ss: 0.16 },
+  { sx: -8, sy: 12, sr: -3, ss: 0.19 },
+  { sx: 15, sy: -10, sr: 6, ss: 0.24 },
+  { sx: -17, sy: 6, sr: -4, ss: 0.18 },
+  { sx: 11, sy: -12, sr: 3, ss: 0.21 },
+  { sx: -10, sy: 8, sr: -6, ss: 0.23 },
+  { sx: 16, sy: 11, sr: 5, ss: 0.17 },
+  { sx: -13, sy: -8, sr: -4, ss: 0.2 },
+  { sx: 9, sy: 10, sr: 5, ss: 0.22 },
 ];
 
 export default function Hero() {
