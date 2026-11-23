@@ -196,10 +196,10 @@ export default function MapExplorer() {
                 <path d="M700 850 L822 930" stroke="#e8e2d2" strokeWidth="2.5" strokeDasharray="4 8" />
 
                 {/* rótulos */}
-                <g fill="#e8e2d2" fontFamily="var(--f-mono)" fontSize="17" letterSpacing="6" opacity=".65">
+                <g fill="#e8e2d2" fontSize="17" letterSpacing="6" opacity=".65">
                   <text x="500" y="360">LEONIDA</text>
                 </g>
-                <g fill="#8fa3c4" fontSize="13" fontFamily="var(--f-mono)" letterSpacing="2" opacity=".55">
+                <g fill="#8fa3c4" fontSize="13" letterSpacing="2" opacity=".55">
                   <text x="90" y="120">GOLFO DE LEONIDA</text>
                   <text x="700" y="985" transform="rotate(-5 700 985)">MAR DE LEONIDA</text>
                   <text x="352" y="152" fontSize="12">MT. KALAGA</text>
@@ -211,12 +211,12 @@ export default function MapExplorer() {
                 <g transform="translate(944,64)" stroke="#8fa3c4" fill="none" opacity=".6">
                   <circle r="26" strokeWidth="1.5" />
                   <path d="M0 -20 L6 8 L0 3 L-6 8 Z" fill="#8fa3c4" stroke="none" />
-                  <text y="-32" textAnchor="middle" fill="#8fa3c4" stroke="none" fontSize="12" fontFamily="var(--f-mono)">N</text>
+                  <text y="-32" textAnchor="middle" fill="#8fa3c4" stroke="none" fontSize="12">N</text>
                 </g>
                 <g transform="translate(60,940)" opacity=".6">
                   <rect width="80" height="4" fill="#8fa3c4" />
                   <rect width="40" height="4" fill="#0a1d33" />
-                  <text x="0" y="-8" fill="#8fa3c4" fontSize="11" fontFamily="var(--f-mono)">20 MI</text>
+                  <text x="0" y="-8" fill="#8fa3c4" fontSize="11">20 MI</text>
                 </g>
               </svg>
 

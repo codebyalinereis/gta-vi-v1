@@ -1,39 +1,22 @@
 /* ============================================================
-   Dados da experiência — assets oficiais, mapa, rádio, mídia
+   Dados da experiência — assets locais, mapa, rádio, mídia
    ============================================================ */
 
-const CDN = "https://www.rockstargames.com/VI/_next/static/media/";
-
-/** Monta URL do CDN oficial com largura otimizada (Akamai). */
-export const img = (file: string, w = 1600) =>
-  `${CDN}${file}${file.includes("?") ? "&" : "?"}akim=1&imdensity=1&imwidth=${w}`;
+/** Arte oficial baixada para /public/img (imune a hotlink/CDN). */
+const I = (name: string) => `/img/${name}`;
 
 export const ASSETS = {
-  posterFull: img("poster_full.0az_iud2g3y4j.jpg", 2200),
-  posterLogo: img("poster_logo.0m-7c805zusl7.png", 900),
-  logoVi: img("logo_vi.02gnpy7k4ozcz.png", 400),
-  logoGta: img("logo_gta.0_~y3s2ni8fbj.png", 700),
-  vi: img("vi.0hxa9~pf214xe.png", 700),
-  meta: img("meta.0t8ty~nlmxq2s.jpg?6wC5t2qhtJZtllO-YhLc", 1200),
-  onlyInLeonida: img("onlyInLeonidaMobile.0mupfnk-x6x~r.jpg", 1800),
-  music: img("musicMobile.16pdg34v6lit..jpg", 1800),
-  gallery: img("screenshotsMobile.01nsldjqbta4u.jpg", 1800),
-  esrb: img("esrb-mature.0k-tky9~eo.-3.svg", 140),
+  posterFull: I("poster.jpg"),
+  posterLogo: I("poster-logo.png"),
+  logoVi: I("logo-vi.png"),
+  vi: I("vi.png"),
+  onlyInLeonida: I("only-in-leonida.jpg"),
+  gallery: I("gallery.jpg"),
+  esrb: I("esrb.svg"),
 };
 
 /** Cacos de vidro do hero — montam o pôster conforme o scroll. */
-export const SHARDS = [
-  "shard0.0_vm6ya9-h67x.png",
-  "shard1.14.-n-5n.4nws.png",
-  "shard2.0n4e6vntuoxgf.png",
-  "shard3.120i1.3ll3tb9.png",
-  "shard4.0bi8cg9mdh8p4.png",
-  "shard5.0qdavlhu9vx3m.png",
-  "shard6.0m27xv.6a~.pk.png",
-  "shard7.0r3-p5yp386ao.png",
-  "shard8.0-nawcceg2vqw.png",
-  "shard9.08p7clh5_sa.q.png",
-].map((f) => img(f, 1000));
+export const SHARDS = Array.from({ length: 10 }, (_, i) => I(`shard-${i}.png`));
 
 /* ------------------------------------------------------------
    Locais de Leonida — marcadores do mapa interativo
@@ -161,28 +144,16 @@ export type StationId = (typeof STATION_META)[number]["id"];
    ------------------------------------------------------------ */
 
 export const TRAILERS = [
-  { label: "Trailer de Lançamento", img: img("launch-trailer-mobile.11.007xolt5y2.jpg", 1200), url: "https://www.rockstargames.com/VI" },
-  { label: "An Extended Look", img: img("an-extended-look-mobile.0f0-3vo3w9u26.jpg", 1200), url: "https://www.rockstargames.com/VI" },
-  { label: "Trailer 2", img: img("trailer-2.0l.7aqib91fz6.jpg", 1200), url: "https://www.youtube.com/watch?v=VQRLujxTm3c" },
-  { label: "Trailer 1", img: img("trailer-1.06b6paykx247w.jpg", 1200), url: "https://www.youtube.com/watch?v=QdBZY2fkU-0" },
+  { label: "Trailer de Lançamento", img: I("t-launch.jpg"), url: "https://www.rockstargames.com/VI" },
+  { label: "An Extended Look", img: I("t-extended.jpg"), url: "https://www.rockstargames.com/VI" },
+  { label: "Trailer 2", img: I("t2.jpg"), url: "https://www.youtube.com/watch?v=VQRLujxTm3c" },
+  { label: "Trailer 1", img: I("t1.jpg"), url: "https://www.youtube.com/watch?v=QdBZY2fkU-0" },
 ];
 
 export const NEWS = [
-  {
-    date: "23 · Nov · 2026",
-    title: "Grand Theft Auto VI: The Album (Deluxe Edition)",
-    img: img("178ok8411a55o5.0bzs42.6~szfb.jpg", 800),
-  },
-  {
-    date: "19 · Nov · 2026",
-    title: "Grand Theft Auto VI já está disponível",
-    img: img("39akk424a9oo53.0sses._-mhxod.jpg", 800),
-  },
-  {
-    date: "10 · Nov · 2026",
-    title: "Pré-carga de Grand Theft Auto VI liberada",
-    img: img("89834o94713o21.04n287k6o2lh9.jpg", 800),
-  },
+  { date: "23 · Nov · 2026", title: "Grand Theft Auto VI: The Album (Deluxe Edition)", img: I("news-album.jpg") },
+  { date: "19 · Nov · 2026", title: "Grand Theft Auto VI já está disponível", img: I("news-launch.jpg") },
+  { date: "10 · Nov · 2026", title: "Pré-carga de Grand Theft Auto VI liberada", img: I("news-preload.jpg") },
 ];
 
 export const OFFICIAL = "https://www.rockstargames.com/VI";

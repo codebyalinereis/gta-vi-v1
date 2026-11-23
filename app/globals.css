@@ -1163,6 +1163,10 @@ body.is-ready .nav {
   height: 1000px;
 }
 
+.mapx__svg text {
+  font-family: var(--f-mono);
+}
+
 .mapx__marker {
   position: absolute;
   translate: -50% -100%;

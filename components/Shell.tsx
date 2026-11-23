@@ -97,10 +97,17 @@ export default function Shell({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     document.body.classList.add("is-loading");
-
-    const t = window.setTimeout(() => setReady(true), 100);
-    return () => window.clearTimeout(t);
+    /* failsafe: se algo der errado, libera o scroll após 6s */
+    const failsafe = window.setTimeout(() => setReady(true), 6000);
+    return () => window.clearTimeout(failsafe);
   }, []);
+
+  useEffect(() => {
+    if (ready) {
+      document.body.classList.remove("is-loading");
+      document.body.classList.add("is-ready");
+    }
+  }, [ready]);
 
   /* toasts via evento global */
   useEffect(() => {
