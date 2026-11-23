@@ -4,86 +4,69 @@ import { useCallback } from "react";
 import { useSceneProgress } from "@/lib/scroll";
 import { ASSETS } from "@/lib/data";
 
+const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
+
 type Side = {
-  num: string;
-  first: string;
-  last: string;
   role: string;
+  name: string;
+  last: string;
   quote: string;
   art: string;
-  dossier: { k: string; v: string }[];
   accent: string;
+  pos: string;
 };
 
 const LUCIA: Side = {
-  num: "01",
-  first: "Lucia",
-  last: "Caminos",
   role: "A sobrevivente",
+  name: "Lucia",
+  last: "Caminos",
   quote: "“Eu saí de Leonida uma vez. Voltei por conta própria — e do meu jeito.”",
   art: ASSETS.lucia,
-  dossier: [
-    { k: "Origem", v: "Vice City, LE" },
-    { k: "Status", v: "Procurada" },
-  ],
   accent: "#ff3fb4",
+  pos: "50% 15%",
 };
 
 const JASON: Side = {
-  num: "02",
-  first: "Jason",
-  last: "Duval",
   role: "O veterano",
+  name: "Jason",
+  last: "Duval",
   quote: "“Só quero uma vida fácil. O problema é descobrir quanto ela custa.”",
   art: ASSETS.jason,
-  dossier: [
-    { k: "Origem", v: "Leonida Keys" },
-    { k: "Status", v: "Em movimento" },
-  ],
   accent: "#ff8a2a",
+  pos: "50% 15%",
 };
 
-function Card({ side, weight }: { side: Side; weight: "l" | "j" }) {
+function Half({ side, weight }: { side: Side; weight: "l" | "j" }) {
   return (
-    <article
-      className={`duo__card duo__card--${weight}`}
-      style={{ "--ac": side.accent } as React.CSSProperties}
+    <div
+      className={`duo__half duo__half--${weight}`}
+      style={{ "--ac": side.accent, "--op": side.pos } as React.CSSProperties}
     >
-      <div className="duo__art">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={side.art} alt={`${side.first} ${side.last}`} loading="lazy" draggable={false} />
-      </div>
-      <span className="duo__num" aria-hidden="true">{side.num}</span>
-      <div className="duo__body">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={side.art} alt={`${side.name} ${side.last}`} loading="lazy" draggable={false} />
+      <div className="duo__label">
         <p className="duo__role">{side.role}</p>
         <h3 className="duo__name">
-          {side.first}
-          <br />
-          <em>{side.last}</em>
+          {side.name} <em>{side.last}</em>
         </h3>
         <p className="duo__quote">{side.quote}</p>
-        <ul className="duo__dossier">
-          {side.dossier.map((d) => (
-            <li key={d.k}>
-              <span>{d.k}</span> {d.v}
-            </li>
-          ))}
-        </ul>
       </div>
-      <span className="duo__shine" aria-hidden="true" />
-    </article>
+    </div>
   );
 }
 
 export default function Duo() {
-  /* progresso da cena → pesos de cada card + encerramento */
+  /* o divisor desliza: Lucia domina → Jason responde → equilíbrio */
   const onUpdate = useCallback((p: number, el: HTMLElement) => {
-    const pl = Math.max(0, Math.min(1, p * 2.2 - 0.05));   // Lucia entra primeiro
-    const pj = Math.max(0, Math.min(1, p * 2.2 - 1.15));   // Jason responde
-    const pb = Math.max(0, Math.min(1, p * 3 - 1.9));      // os dois juntos
-    el.style.setProperty("--pl", pl.toFixed(4));
-    el.style.setProperty("--pj", pj.toFixed(4));
-    el.style.setProperty("--pb", pb.toFixed(4));
+    const s1 = clamp01(p / 0.4);
+    const s2 = clamp01((p - 0.4) / 0.4);
+    const s3 = clamp01((p - 0.8) / 0.2);
+    const d = 50 + 18 * s1 - 36 * s2 + 18 * s3;
+    el.style.setProperty("--dl", d.toFixed(2));
+    el.style.setProperty("--dj", (100 - d).toFixed(2));
+    el.style.setProperty("--eL", Math.min(1, s1 * (1 - s2) + s3 * 0.5 + 0.1).toFixed(3));
+    el.style.setProperty("--eJ", Math.min(1, s2 * (1 - s3 * 0.5) + 0.1).toFixed(3));
+    el.style.setProperty("--pb", clamp01((p - 0.85) / 0.15).toFixed(3));
   }, []);
 
   const ref = useSceneProgress<HTMLElement>(onUpdate);
@@ -97,17 +80,14 @@ export default function Duo() {
       ref={ref}
     >
       <div className="duo__stage">
-        {/* palco: pôr do sol */}
-        <div className="duo__bg" aria-hidden="true">
-          <div className="duo__sun" />
-        </div>
-
         <p className="duo__chapter">02 · A Dupla</p>
 
-        <Card side={LUCIA} weight="l" />
-        <Card side={JASON} weight="j" />
+        <div className="duo__sides">
+          <Half side={LUCIA} weight="l" />
+          <div className="duo__divider" aria-hidden="true" />
+          <Half side={JASON} weight="j" />
+        </div>
 
-        {/* encerramento */}
         <div className="duo__finale">
           <p className="duo__finale-kicker">Um golpe. Um estado. Nenhuma saída limpa.</p>
           <h3 className="duo__finale-title">
