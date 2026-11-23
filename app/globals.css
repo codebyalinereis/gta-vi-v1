@@ -736,6 +736,24 @@ body.is-ready .nav {
   opacity: var(--p, 0);
 }
 
+.hero__poster {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55);
+  opacity: clamp((var(--p, 0) - 0.55) * 3, 0, 1);
+  transform: scale(calc(1.05 - var(--p, 0) * 0.05));
+  pointer-events: none;
+}
+
+.hero__poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .hero__inner {
   position: absolute;
   z-index: 3;
@@ -744,7 +762,7 @@ body.is-ready .nav {
   gap: clamp(10px, 2vw, 18px);
   text-align: center;
   padding: 0 var(--pad);
-  opacity: clamp((var(--p, 0) - 0.55) * 2.8, 0, 1);
+  opacity: clamp((var(--p, 0) - 0.72) * 3.5, 0, 1);
   transform: translateY(calc((1 - var(--p, 0)) * 44px));
   pointer-events: none;
 }
@@ -981,23 +999,36 @@ body.is-ready .nav {
 .duo__media {
   position: absolute;
   inset: 0;
+  background:
+    radial-gradient(90% 60% at 70% 20%, rgba(255, 154, 213, 0.25), transparent 60%),
+    linear-gradient(180deg, #150a28 0%, #35124b 45%, #8a1c5e 75%, #ff5f3c 100%);
+}
+
+.duo__panel--j .duo__media {
+  background:
+    radial-gradient(90% 60% at 30% 20%, rgba(95, 240, 255, 0.18), transparent 60%),
+    linear-gradient(180deg, #0b0416 0%, #2a0f45 40%, #7a1d5e 70%, #ff8a2a 100%);
 }
 
 .duo__media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 22%;
   user-select: none;
-  transform: scale(calc(1.12 - var(--w, 0) * 0.05));
+  transform: scale(calc(1.08 - var(--w, 0) * 0.03)) translateX(calc(var(--w, 0) * -1.5%));
+  will-change: transform;
 }
 
 .duo__veil {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(5, 2, 8, 0.55), rgba(5, 2, 8, 0.15) 40%, rgba(5, 2, 8, 0.92)),
-    linear-gradient(90deg, rgba(5, 2, 8, 0.6), transparent 30%, transparent 70%, rgba(5, 2, 8, 0.6));
-  opacity: calc(0.72 - var(--w, 0) * 0.35);
+    linear-gradient(180deg, rgba(5, 2, 8, 0.6), rgba(5, 2, 8, 0.15) 32%, rgba(5, 2, 8, 0.6) 60%, rgba(5, 2, 8, 0.95)),
+    linear-gradient(90deg, rgba(5, 2, 8, 0.55), transparent 24%, transparent 76%, rgba(5, 2, 8, 0.55));
+  opacity: calc(0.85 - var(--w, 0) * 0.3);
 }
 
 .duo__info {
@@ -1938,6 +1969,7 @@ body.is-ready .nav {
     transform: none !important;
     opacity: 1 !important;
   }
+  .hero__poster { opacity: 1 !important; transform: none !important; }
   .hero__inner { opacity: 1 !important; transform: none !important; }
 
   .duo { height: auto; }

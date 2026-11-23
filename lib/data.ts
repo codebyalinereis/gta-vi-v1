@@ -10,6 +10,8 @@ export const ASSETS = {
   posterLogo: I("poster-logo.png"),
   logoVi: I("logo-vi.png"),
   vi: I("vi.png"),
+  lucia: I("lucia.png"),
+  jason: I("jason.png"),
   onlyInLeonida: I("only-in-leonida.jpg"),
   gallery: I("gallery.jpg"),
   esrb: I("esrb.svg"),

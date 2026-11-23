@@ -43,6 +43,11 @@ export default function Hero() {
             </div>
           ))}
           <div className="hero__mosaic-glow" aria-hidden="true" />
+          {/* o pôster inteiro emerge quando os cacos se alinham */}
+          <div className="hero__poster" aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={ASSETS.posterFull} alt="" loading="lazy" draggable={false} />
+          </div>
         </div>
 
         {/* conteúdo — surge quando o mosaico fecha */}

@@ -9,7 +9,7 @@ type Side = {
   name: string;
   role: string;
   quote: string;
-  crop: string;
+  art: string;
   origin: string;
   status: string;
   accent: string;
@@ -20,7 +20,7 @@ const LUCIA: Side = {
   name: "Lucia Caminos",
   role: "A sobrevivente",
   quote: "“Eu saí de Leonida uma vez. Voltei por conta própria — e do meu jeito.”",
-  crop: "18% 24%",
+  art: ASSETS.lucia,
   origin: "Origem · Vice City, LE",
   status: "Status · Procurada",
   accent: "#ff3fb4",
@@ -31,7 +31,7 @@ const JASON: Side = {
   name: "Jason Duval",
   role: "O veterano",
   quote: "“Só quero uma vida fácil. O problema é descobrir quanto ela custa.”",
-  crop: "84% 22%",
+  art: ASSETS.jason,
   origin: "Origem · Leonida Keys",
   status: "Status · Em movimento",
   accent: "#ff8a2a",
@@ -43,10 +43,9 @@ function Panel({ side, weight }: { side: Side; weight: "l" | "j" }) {
       <div className="duo__media">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={ASSETS.posterFull}
+          src={side.art}
           alt={side.name}
           loading="lazy"
-          style={{ objectPosition: side.crop }}
           draggable={false}
         />
       </div>
