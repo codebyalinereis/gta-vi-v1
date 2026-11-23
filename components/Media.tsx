@@ -6,7 +6,7 @@ export default function Media() {
       <div className="container">
         <header className="section-head section-head--split" data-reveal>
           <div>
-            <p className="label"><span>05</span> Mídia</p>
+            <p className="label"><span>06</span> Mídia</p>
             <h2 className="display">Direto de <em>Leonida.</em></h2>
           </div>
           <p className="section-head__text">

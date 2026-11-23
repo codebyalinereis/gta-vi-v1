@@ -1,101 +1,129 @@
 "use client";
 
-import { useCallback } from "react";
+import { useRef } from "react";
 import { useSceneProgress } from "@/lib/scroll";
 import { ASSETS } from "@/lib/data";
 
-const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
-
 type Side = {
-  role: string;
-  name: string;
+  num: string;
+  first: string;
   last: string;
+  role: string;
   quote: string;
   art: string;
   accent: string;
-  pos: string;
+  align: "l" | "r";
+  dossier: { k: string; v: string }[];
 };
 
 const LUCIA: Side = {
-  role: "A sobrevivente",
-  name: "Lucia",
+  num: "01",
+  first: "Lucia",
   last: "Caminos",
+  role: "A sobrevivente",
   quote: "“Eu saí de Leonida uma vez. Voltei por conta própria — e do meu jeito.”",
   art: ASSETS.lucia,
   accent: "#ff3fb4",
-  pos: "50% 15%",
+  align: "l",
+  dossier: [
+    { k: "Origem", v: "Vice City" },
+    { k: "Condado", v: "Vice-Dale" },
+    { k: "Status", v: "Procurada" },
+  ],
 };
 
 const JASON: Side = {
-  role: "O veterano",
-  name: "Jason",
+  num: "02",
+  first: "Jason",
   last: "Duval",
+  role: "O veterano",
   quote: "“Só quero uma vida fácil. O problema é descobrir quanto ela custa.”",
   art: ASSETS.jason,
   accent: "#ff8a2a",
-  pos: "50% 15%",
+  align: "r",
+  dossier: [
+    { k: "Origem", v: "Leonida Keys" },
+    { k: "Condado", v: "Mariana" },
+    { k: "Status", v: "Em movimento" },
+  ],
 };
 
-function Half({ side, weight }: { side: Side; weight: "l" | "j" }) {
+function Scene({ data }: { data: Side }) {
+  const ref = useSceneProgress<HTMLDivElement>();
+  const stage = useRef<HTMLDivElement>(null);
+
+  /* parallax de mouse — a figura e o nome seguem o cursor em camadas */
+  const onMove = (e: React.MouseEvent) => {
+    const el = stage.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", String((e.clientX - r.left) / r.width - 0.5));
+    el.style.setProperty("--my", String((e.clientY - r.top) / r.height - 0.5));
+  };
+
   return (
-    <div
-      className={`duo__half duo__half--${weight}`}
-      style={{ "--ac": side.accent, "--op": side.pos } as React.CSSProperties}
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={side.art} alt={`${side.name} ${side.last}`} loading="lazy" draggable={false} />
-      <div className="duo__label">
-        <p className="duo__role">{side.role}</p>
-        <h3 className="duo__name">
-          {side.name} <em>{side.last}</em>
-        </h3>
-        <p className="duo__quote">{side.quote}</p>
+    <div className="char scene" ref={ref}>
+      <div
+        className={`char__stage char__stage--${data.align}`}
+        ref={stage}
+        onMouseMove={onMove}
+        style={{ "--ac": data.accent } as React.CSSProperties}
+      >
+        <span className="char__ghost" aria-hidden="true">{data.first}</span>
+        <div className="char__sun" aria-hidden="true" />
+
+        {/* figura em recorte — entra com o scroll, flutua com o mouse */}
+        <div className="char__fig">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={data.art} alt={`${data.first} ${data.last}`} draggable={false} />
+        </div>
+
+        <div className="char__info">
+          <p className="char__num">{data.num} · protagonista</p>
+          <h3 className="char__name">
+            {data.first} <em>{data.last}</em>
+          </h3>
+          <p className="char__role">{data.role}</p>
+          <p className="char__quote">{data.quote}</p>
+          <ul className="char__dossier">
+            {data.dossier.map((d) => (
+              <li key={d.k}>
+                <span>{d.k}</span> {d.v}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="char__scroll" aria-hidden="true">
+          <span /> continue descendo
+        </div>
       </div>
     </div>
   );
 }
 
 export default function Duo() {
-  /* o divisor desliza: Lucia domina → Jason responde → equilíbrio */
-  const onUpdate = useCallback((p: number, el: HTMLElement) => {
-    const s1 = clamp01(p / 0.35);
-    const s2 = clamp01((p - 0.35) / 0.35);
-    const s3 = clamp01((p - 0.7) / 0.3);
-    const d = 50 + 24 * s1 - 48 * s2 + 24 * s3;
-    el.style.setProperty("--dl", d.toFixed(2));
-    el.style.setProperty("--dj", (100 - d).toFixed(2));
-    el.style.setProperty("--eL", Math.min(1, s1 * (1 - s2) + s3 * 0.5 + 0.1).toFixed(3));
-    el.style.setProperty("--eJ", Math.min(1, s2 * (1 - s3 * 0.5) + 0.1).toFixed(3));
-    el.style.setProperty("--pb", clamp01((p - 0.85) / 0.15).toFixed(3));
-  }, []);
-
-  const ref = useSceneProgress<HTMLElement>(onUpdate);
-
   return (
     <section
-      className="duo scene"
+      className="duo-wrap"
       id="dupla"
       data-loc="Vice Beach"
       data-locsub="Península sul · maré alta"
-      ref={ref}
     >
-      <div className="duo__stage">
-        <p className="duo__chapter">02 · A Dupla</p>
-
-        <div className="duo__sides">
-          <Half side={LUCIA} weight="l" />
-          <div className="duo__divider" aria-hidden="true" />
-          <Half side={JASON} weight="j" />
-        </div>
-
-        <div className="duo__finale">
-          <p className="duo__finale-kicker">Um golpe. Um estado. Nenhuma saída limpa.</p>
-          <h3 className="duo__finale-title">
-            Lucia <em>&amp;</em> Jason
-          </h3>
-          <p className="duo__finale-sub">Contra todo mundo — inclusive um contra o outro.</p>
-        </div>
+      <div className="container">
+        <header className="section-head section-head--split" data-reveal>
+          <div>
+            <p className="label"><span>02</span> A Dupla</p>
+            <h2 className="display">Dois lados, <em>uma lei.</em></h2>
+          </div>
+          <p className="section-head__text">
+            Cada um tem sua própria cena — role devagar. E mova o mouse: eles reagem.
+          </p>
+        </header>
       </div>
+
+      <Scene data={LUCIA} />
+      <Scene data={JASON} />
     </section>
   );
 }

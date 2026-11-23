@@ -8,7 +8,8 @@ const LINKS = [
   { href: "#dupla", n: "01", label: "A Dupla" },
   { href: "#mapa", n: "02", label: "Mapa" },
   { href: "#radio", n: "03", label: "Rádio" },
-  { href: "#midia", n: "04", label: "Mídia" },
+  { href: "#ovos", n: "04", label: "Ovos" },
+  { href: "#midia", n: "05", label: "Mídia" },
 ];
 
 export default function Nav() {
