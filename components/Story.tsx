@@ -19,8 +19,8 @@ export default function Story() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="story__img"
-              src={ASSETS.onlyInLeonida}
-              alt="Lucia e Jason em Vice City"
+              src={ASSETS.storyArt}
+              alt="Cena de Grand Theft Auto VI em Leonida"
               loading="lazy"
             />
             <span className="story__cap">Vice City · hora dourada</span>

@@ -25,6 +25,10 @@ export default function Hero() {
       <div className="hero__stage">
         <div className="hero__sky" aria-hidden="true" />
 
+        <p className="hero__top">
+          <span className="hero__eyebrow">Disponível agora · 19 · 11 · 2026</span>
+        </p>
+
         {/* mosaico de cacos — se monta conforme o scroll */}
         <div className="hero__mosaic" aria-label="Arte oficial de Grand Theft Auto VI se montando com a rolagem">
           {SHARDS.map((src, i) => (
@@ -48,13 +52,14 @@ export default function Hero() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={ASSETS.posterFull} alt="" loading="lazy" draggable={false} />
           </div>
+          {/* GTA VI no meio dos cards que viram o pôster */}
+          <div className="hero__mark">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={ASSETS.posterLogo} alt="Grand Theft Auto VI" draggable={false} />
+          </div>
         </div>
 
-        {/* conteúdo — surge quando o mosaico fecha */}
-        <div className="hero__inner">
-          <p className="hero__eyebrow">Disponível agora · 19 · 11 · 2026</p>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="hero__logo" src={ASSETS.posterLogo} alt="Grand Theft Auto VI" />
+        <div className="hero__bottom">
           <p className="hero__tagline">
             O baralho sempre esteve marcado contra eles.<br />
             Resta descobrir quem marca as cartas.

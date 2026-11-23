@@ -14,6 +14,7 @@ export const ASSETS = {
   jason: I("jason.png"),
   onlyInLeonida: I("only-in-leonida.jpg"),
   gallery: I("gallery.jpg"),
+  storyArt: I("t-launch.jpg"),
   esrb: I("esrb.svg"),
 };
 
