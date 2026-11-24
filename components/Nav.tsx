@@ -8,7 +8,7 @@ const LINKS = [
   { href: "#dupla", n: "01", label: "A Dupla" },
   { href: "#mapa", n: "02", label: "Mapa" },
   { href: "#radio", n: "03", label: "Rádio" },
-  { href: "#ovos", n: "04", label: "Ovos" },
+  { href: "#easter-eggs", n: "04", label: "Easter Eggs" },
   { href: "#midia", n: "05", label: "Mídia" },
 ];
 

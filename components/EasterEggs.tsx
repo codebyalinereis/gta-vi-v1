@@ -16,7 +16,7 @@ export default function EasterEggs() {
   };
 
   return (
-    <section className="section eggs" id="ovos" data-loc="Motel Waning Sands" data-locsub="Condado de Leonard · quarto 6">
+    <section className="section eggs" id="easter-eggs" data-loc="Motel Waning Sands" data-locsub="Condado de Leonard · quarto 6">
       <div className="container">
         <header className="section-head section-head--split" data-reveal>
           <div>
@@ -52,7 +52,7 @@ export default function EasterEggs() {
                 aria-pressed={isFound}
                 onClick={() => flip(i)}
               >
-                <span className="egg__inner" aria-hidden={isFound}>
+                <span className="egg__inner">
                   <span className="egg__face egg__face--front">
                     <span className="egg__q">?</span>
                     <span className={`egg__cat${isSite ? " egg__cat--site" : ""}`}>{egg.cat}</span>

@@ -2113,10 +2113,9 @@ body.is-ready .nav {
   .char__fig { position: relative; left: auto; bottom: auto; translate: none; opacity: 1 !important; transform: none !important; }
   .char__info { position: relative; left: auto; right: auto; bottom: auto; opacity: 1 !important; transform: none !important; margin: 20px auto 0; }
   .char__stage--r .char__info { right: auto; }
-  .egg__inner { transition: none; }
-  .egg.is-found .egg__inner { transform: none; }
-  .egg__face--back { transform: none; }
+  .egg__face { transition: none; }
   .egg__face--front { display: none; }
+  .egg__face--back { transform: none; opacity: 1; }
 }
 
 /* ============================================================
@@ -2433,12 +2432,6 @@ body.is-ready .nav {
   display: block;
   width: 100%;
   height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.7s var(--ease);
-}
-
-.egg.is-found .egg__inner {
-  transform: rotateY(180deg);
 }
 
 .egg.is-found {
@@ -2456,10 +2449,9 @@ body.is-ready .nav {
   gap: 12px;
   padding: 22px;
   border-radius: 18px;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   border: 1px solid rgba(255, 255, 255, 0.12);
   overflow: hidden;
+  transition: transform 0.55s var(--ease), opacity 0.4s;
 }
 
 .egg__face--front {
@@ -2515,7 +2507,8 @@ body.is-ready .nav {
 }
 
 .egg__face--back {
-  transform: rotateY(180deg);
+  transform: rotateY(90deg) scale(0.96);
+  opacity: 0;
   background:
     radial-gradient(80% 60% at 50% 0%, rgba(255, 63, 180, 0.18), transparent 60%),
     linear-gradient(165deg, #1a0a2b, #0d0517);
@@ -2523,6 +2516,16 @@ body.is-ready .nav {
   justify-content: flex-start;
   text-align: left;
   gap: 10px;
+}
+
+.egg.is-found .egg__face--front {
+  transform: rotateY(-90deg) scale(0.96);
+  opacity: 0;
+}
+
+.egg.is-found .egg__face--back {
+  transform: rotateY(0deg) scale(1);
+  opacity: 1;
 }
 
 .egg--site .egg__face--back {
