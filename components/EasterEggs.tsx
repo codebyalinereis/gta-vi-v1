@@ -53,15 +53,18 @@ export default function EasterEggs() {
                 onClick={() => flip(i)}
               >
                 <span className="egg__inner">
-                  <span className="egg__face egg__face--front">
-                    <span className="egg__q">?</span>
-                    <span className={`egg__cat${isSite ? " egg__cat--site" : ""}`}>{egg.cat}</span>
-                    <span className="egg__hint">virar carta</span>
-                  </span>
-                  <span className="egg__face egg__face--back">
-                    <span className="egg__title">{egg.title}</span>
-                    <span className="egg__desc">{egg.desc}</span>
-                  </span>
+                  {isFound ? (
+                    <span className="egg__face egg__face--back">
+                      <span className="egg__title">{egg.title}</span>
+                      <span className="egg__desc">{egg.desc}</span>
+                    </span>
+                  ) : (
+                    <span className="egg__face egg__face--front">
+                      <span className="egg__q">?</span>
+                      <span className={`egg__cat${isSite ? " egg__cat--site" : ""}`}>{egg.cat}</span>
+                      <span className="egg__hint">virar carta</span>
+                    </span>
+                  )}
                 </span>
               </button>
             );
