@@ -2113,7 +2113,6 @@ body.is-ready .nav {
   .char__fig { position: relative; left: auto; bottom: auto; translate: none; opacity: 1 !important; transform: none !important; }
   .char__info { position: relative; left: auto; right: auto; bottom: auto; opacity: 1 !important; transform: none !important; margin: 20px auto 0; }
   .char__stage--r .char__info { right: auto; }
-  .egg__face--back { animation: none; }
 }
 
 /* ============================================================
@@ -2368,50 +2367,11 @@ body.is-ready .nav {
 }
 
 /* ============================================================
-   EASTER EGGS — cartas que viram
+   EASTER EGGS — sempre visíveis
    ============================================================ */
 
 .eggs {
   background: linear-gradient(180deg, var(--ink), #0c0517 55%, var(--ink));
-}
-
-.eggs__meta {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: clamp(20px, 3vw, 30px);
-}
-
-.eggs__count {
-  font-family: var(--f-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--cream);
-  white-space: nowrap;
-}
-
-.eggs__count b {
-  color: var(--pink);
-  font-size: 1rem;
-}
-
-.eggs__bar {
-  position: relative;
-  flex: 1;
-  max-width: 320px;
-  height: 3px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-}
-
-.eggs__bar i {
-  position: absolute;
-  inset: 0 auto 0 0;
-  border-radius: 3px;
-  background: linear-gradient(90deg, var(--hot), var(--pink), var(--orange));
-  transition: width 0.5s var(--ease);
 }
 
 .eggs__grid {
@@ -2421,64 +2381,39 @@ body.is-ready .nav {
 }
 
 .egg {
-  aspect-ratio: 3 / 3.6;
-}
-
-.egg__inner {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.egg.is-found {
-  border-radius: 18px;
-  box-shadow: 0 0 0 1px rgba(255, 63, 180, 0.35), 0 0 40px -6px rgba(255, 63, 180, 0.35);
-}
-
-.egg__face {
-  position: absolute;
-  inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 12px;
-  padding: 22px;
+  padding: clamp(18px, 2vw, 24px);
+  border: 1px solid rgba(255, 63, 180, 0.28);
   border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  overflow: hidden;
-}
-
-.egg__face--front {
   background:
-    radial-gradient(80% 60% at 50% 20%, rgba(255, 63, 180, 0.14), transparent 65%),
-    linear-gradient(160deg, #12081f, #0a0413);
+    radial-gradient(80% 60% at 50% 0%, rgba(255, 63, 180, 0.14), transparent 60%),
+    linear-gradient(165deg, #1a0a2b, #0d0517);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
+  transition: transform 0.45s var(--ease), border-color 0.4s, box-shadow 0.4s;
 }
 
-.egg__face--front::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 9px);
-  pointer-events: none;
+.egg:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 63, 180, 0.6);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.55), 0 0 44px -8px rgba(255, 63, 180, 0.35);
 }
 
-.egg__q {
-  font-family: var(--f-display);
-  font-weight: 900;
-  font-size: clamp(3.4rem, 6vw, 5rem);
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 154, 213, 0.55);
-  transition: transform 0.5s var(--ease);
+.egg--site {
+  border-color: rgba(95, 240, 255, 0.28);
+  background:
+    radial-gradient(80% 60% at 50% 0%, rgba(95, 240, 255, 0.1), transparent 60%),
+    linear-gradient(165deg, #0d1a2b, #0a0413);
 }
 
-.egg:hover .egg__q {
-  transform: scale(1.12) rotate(-6deg);
+.egg--site:hover {
+  border-color: rgba(95, 240, 255, 0.6);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.55), 0 0 44px -8px rgba(95, 240, 255, 0.3);
 }
 
 .egg__cat {
+  align-self: flex-start;
   padding: 5px 11px;
   border: 1px solid rgba(255, 154, 213, 0.4);
   border-radius: 999px;
@@ -2489,57 +2424,25 @@ body.is-ready .nav {
   color: var(--rose);
 }
 
-.egg__cat--site {
+.egg--site .egg__cat {
   border-color: rgba(95, 240, 255, 0.4);
   color: var(--cyan);
 }
 
-.egg__hint {
-  font-family: var(--f-mono);
-  font-size: 0.44rem;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: rgba(255, 244, 236, 0.35);
-}
-
-.egg__face--back {
-  background:
-    radial-gradient(80% 60% at 50% 0%, rgba(255, 63, 180, 0.18), transparent 60%),
-    linear-gradient(165deg, #1a0a2b, #0d0517);
-  border-color: rgba(255, 63, 180, 0.45);
-  justify-content: flex-start;
-  text-align: left;
-  gap: 10px;
-  animation: eggIn 0.45s var(--ease) both;
-}
-
-@keyframes eggIn {
-  from {
-    opacity: 0;
-    transform: scale(0.92) rotate(-1.5deg);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.egg--site .egg__face--back {
-  border-color: rgba(95, 240, 255, 0.45);
-}
-
 .egg__title {
+  margin: 0;
   font-family: var(--f-display);
   font-weight: 900;
-  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-size: clamp(1.25rem, 1.9vw, 1.6rem);
   line-height: 0.95;
   text-transform: uppercase;
   color: var(--cream);
 }
 
 .egg__desc {
-  font-size: 0.78rem;
-  line-height: 1.55;
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
   color: var(--muted);
 }
 
@@ -2555,5 +2458,4 @@ body.is-ready .nav {
   .char__stage--r .char__info { right: 14px; }
   .char__scroll { display: none; }
   .eggs__grid { grid-template-columns: 1fr; }
-  .egg { aspect-ratio: 3 / 2.6; }
 }
