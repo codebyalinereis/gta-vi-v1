@@ -91,8 +91,10 @@ export default function Shell({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
   const [toasts, setToasts] = useState<{ id: number; html: string }[]>([]);
   const [police, setPolice] = useState(false);
+  const [cheatSky, setCheatSky] = useState(false);
   const [loc, setLoc] = useState<{ name: string; sub: string; key: number } | null>(null);
   const locTimer = useRef<number>(0);
+  const skyTimer = useRef<number>(0);
   const lastLoc = useRef(0);
 
   useEffect(() => {
@@ -139,8 +141,11 @@ export default function Shell({ children }: { children: React.ReactNode }) {
         if (buf === "hesoyam") {
           buf = "";
           burst();
+          setCheatSky(true);
+          window.clearTimeout(skyTimer.current);
+          skyTimer.current = window.setTimeout(() => setCheatSky(false), 5200);
           window.dispatchEvent(new CustomEvent("vi:toast", {
-            detail: { html: "<b>HESOYAM</b> — Vida, colete e $250.000 na conta.", dur: 4200 },
+            detail: { html: "<b>HESOYAM</b> — Vida, colete, $250.000… e o céu respondeu.", dur: 4200 },
           }));
         }
       }
@@ -238,6 +243,9 @@ export default function Shell({ children }: { children: React.ReactNode }) {
 
       {/* luzes de polícia */}
       <div className={`police${police ? " is-on" : ""}`} aria-hidden="true" />
+
+      {/* céu dourado do cheat HESOYAM */}
+      <div className={`cheat-sky${cheatSky ? " is-on" : ""}`} aria-hidden="true" />
     </>
   );
 }

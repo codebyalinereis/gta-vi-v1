@@ -208,6 +208,24 @@ button {
   transition: opacity 0.45s;
 }
 
+/* céu dourado do HESOYAM */
+.cheat-sky {
+  position: fixed;
+  inset: 0;
+  z-index: 388;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.1s var(--ease);
+  background:
+    radial-gradient(60% 45% at 50% 16%, rgba(255, 244, 212, 0.9), transparent 70%),
+    linear-gradient(180deg, #7ec8ff 0%, #bfe3ff 34%, #ffe9b0 62%, #ffd166 100%);
+  mix-blend-mode: soft-light;
+}
+
+.cheat-sky.is-on {
+  opacity: 0.95;
+}
+
 .police.is-on {
   opacity: 1;
 }
